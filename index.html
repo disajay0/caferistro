@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cafe Ristro — Fine Coffee &amp; Juice | Kalutara</title>
+<meta name="description" content="Fine coffee &amp; juice in downtown Kalutara. Fresh juice, bubble coffee, cold brew, mojitos, milkshakes and snacks. 202 Sir Cyryl de Zoysa Mawatha.">
+<meta property="og:title" content="Cafe Ristro — Fine Coffee &amp; Juice">
+<meta property="og:description" content="Fresh juice, bubble coffee, cold brew, mojitos. Downtown Kalutara.">
+<meta property="og:image" content="images/storefront.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="images/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@400;600;700&family=Permanent+Marker&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A0A0A;
+    --ink-2:#141110;
+    --maroon:#7A0E1F;
+    --amber:#F5B942;
+    --paper:#FFFFFF;
+    --smoke:rgba(255,255,255,.62);
+    --display:'Anton',Impact,sans-serif;
+    --marker:'Permanent Marker',cursive;
+    --util:'Barlow Condensed',sans-serif;
+    --body:'Inter',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--body);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  a{color:inherit}
+  ::selection{background:var(--amber);color:var(--ink)}
+  :focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+
+  /* ---------- graffiti marks ---------- */
+  .tag{position:absolute;pointer-events:none;z-index:2}
+  .tag path{fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding:clamp(20px,4vw,56px);
+    overflow:hidden;
+    /* photo layer sits on top of the fallback gradient — if the file is
+       missing the gradient simply shows through instead */
+    background:
+      linear-gradient(180deg,rgba(10,10,10,.5) 0%,rgba(10,10,10,.15) 30%,rgba(10,10,10,.95) 100%),
+      url('images/storefront.jpg') center/cover no-repeat,
+      radial-gradient(120% 90% at 70% 30%,#2b1d12 0%,#0A0A0A 70%);
+  }
+  .hero-grain{
+    position:absolute;inset:0;z-index:1;pointer-events:none;opacity:.5;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+  }
+  .badge{
+    position:absolute;
+    top:clamp(16px,3vw,40px);
+    right:clamp(16px,3vw,40px);
+    width:clamp(74px,10vw,124px);
+    z-index:5;
+    transform:rotate(-9deg);
+    filter:drop-shadow(0 10px 26px rgba(0,0,0,.8));
+  }
+  .badge img{width:100%;display:block;border-radius:50%}
+  .badge-fallback{
+    width:100%;aspect-ratio:1;border-radius:50%;
+    background:var(--paper);color:var(--maroon);
+    display:grid;place-content:center;text-align:center;
+    font-family:var(--util);font-weight:700;line-height:.95;
+    font-size:clamp(9px,1.3vw,13px);letter-spacing:.06em;
+    border:6px solid #3B1F10;
+  }
+  .hero-inner{position:relative;z-index:4;max-width:1200px;width:100%}
+  .eyebrow{
+    font-family:var(--marker);
+    color:var(--amber);
+    font-size:clamp(15px,2.4vw,26px);
+    transform:rotate(-2.5deg);
+    margin-bottom:.35em;
+    text-shadow:0 2px 0 rgba(0,0,0,.6);
+  }
+  h1{
+    font-family:var(--display);
+    font-size:clamp(56px,13.5vw,190px);
+    line-height:.83;
+    letter-spacing:-.015em;
+    text-transform:uppercase;
+    -webkit-text-stroke:2px var(--ink);
+    paint-order:stroke fill;
+    text-shadow:0 6px 0 rgba(0,0,0,.45);
+  }
+  h1 .amber{color:var(--amber)}
+  .hero-meta{
+    margin-top:clamp(18px,3vw,34px);
+    display:flex;flex-wrap:wrap;gap:12px 26px;align-items:center;
+    font-family:var(--util);
+    font-size:clamp(14px,1.7vw,20px);
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--smoke);
+  }
+  .open-pill{
+    background:var(--maroon);color:var(--paper);
+    padding:7px 16px 5px;
+    letter-spacing:.2em;font-weight:700;
+    display:inline-flex;align-items:center;gap:9px;
+  }
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--amber);animation:blink 1.9s ease-in-out infinite}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.25}}
+
+  /* ---------- ticker ---------- */
+  .ticker{
+    background:var(--amber);color:var(--ink);
+    border-top:4px solid var(--ink);border-bottom:4px solid var(--ink);
+    overflow:hidden;white-space:nowrap;padding:11px 0;
+    position:relative;z-index:6;
+  }
+  .ticker-track{display:inline-flex;animation:slide 26s linear infinite}
+  .ticker span{
+    font-family:var(--display);
+    font-size:clamp(17px,2.4vw,30px);
+    text-transform:uppercase;letter-spacing:.03em;
+    padding:0 22px;
+  }
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ---------- sections ---------- */
+  section{position:relative;padding:clamp(56px,9vw,120px) clamp(20px,4vw,56px)}
+  .wrap{max-width:1200px;margin:0 auto;position:relative;z-index:3}
+  .section-head{margin-bottom:clamp(32px,5vw,64px)}
+  .kicker{
+    font-family:var(--marker);color:var(--amber);
+    font-size:clamp(14px,1.9vw,21px);
+    transform:rotate(-1.5deg);display:inline-block;margin-bottom:.3em;
+  }
+  h2{
+    font-family:var(--display);
+    font-size:clamp(40px,8vw,104px);
+    line-height:.86;text-transform:uppercase;letter-spacing:-.01em;
+    -webkit-text-stroke:2px var(--ink);paint-order:stroke fill;
+  }
+
+  /* ---------- the board (signature) ---------- */
+  .board{background:var(--ink-2);border-top:4px solid var(--maroon)}
+  .board-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(272px,1fr));
+    gap:clamp(28px,4vw,52px);
+  }
+  .cat-title{
+    font-family:var(--marker);
+    color:var(--amber);
+    font-size:clamp(19px,2.4vw,27px);
+    transform:rotate(-1.2deg);
+    margin-bottom:14px;
+    border-bottom:3px solid var(--maroon);
+    padding-bottom:8px;
+  }
+  .items{list-style:none}
+  .items li{
+    font-family:var(--util);
+    font-weight:600;
+    font-size:clamp(16px,1.9vw,21px);
+    letter-spacing:.05em;
+    text-transform:uppercase;
+    padding:7px 10px 5px;
+    color:rgba(255,255,255,.9);
+    display:flex;align-items:baseline;gap:9px;
+    transition:background .16s ease,color .16s ease,transform .16s ease;
+  }
+  .items li:hover{background:var(--maroon);color:var(--paper);transform:translateX(6px)}
+  .items .nm{flex:0 1 auto}
+  .items .lead{
+    flex:1 1 auto;min-width:14px;
+    border-bottom:1px dotted rgba(255,255,255,.24);
+    transform:translateY(-5px);
+  }
+  .items li:hover .lead{border-bottom-color:rgba(255,255,255,.45)}
+  .items .pr{flex:0 0 auto;color:var(--amber);white-space:nowrap;font-weight:700}
+  .items .star{color:var(--amber);font-family:var(--body);font-size:.7em;vertical-align:middle}
+  .sub{
+    font-family:var(--util);
+    font-size:clamp(12px,1.4vw,15px);
+    letter-spacing:.1em;text-transform:uppercase;
+    color:rgba(255,255,255,.42);
+    padding:0 10px 9px;margin-top:-4px;
+  }
+  .board-note{
+    margin-top:clamp(34px,5vw,58px);
+    font-family:var(--util);letter-spacing:.14em;text-transform:uppercase;
+    color:var(--smoke);font-size:clamp(13px,1.5vw,17px);
+  }
+
+  /* ---------- gallery ---------- */
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:10px;
+  }
+  .shot{
+    aspect-ratio:4/5;
+    background:linear-gradient(150deg,#2a1c12,#0f0d0c);
+    border:2px solid rgba(245,185,66,.18);
+    background-size:cover;background-position:center;
+    position:relative;overflow:hidden;
+  }
+  .shot::after{
+    content:attr(data-label);
+    position:absolute;left:0;bottom:0;
+    background:var(--ink);color:var(--amber);
+    font-family:var(--util);font-size:12px;letter-spacing:.2em;
+    text-transform:uppercase;padding:6px 11px 4px;
+  }
+
+  /* ---------- find us ---------- */
+  .find{background:var(--maroon)}
+  .find h2{-webkit-text-stroke:2px rgba(0,0,0,.5)}
+  .find-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:clamp(28px,4vw,54px);align-items:start;
+  }
+  .fact-label{
+    font-family:var(--util);font-size:14px;letter-spacing:.24em;
+    text-transform:uppercase;color:var(--amber);margin-bottom:9px;
+  }
+  .fact-body{
+    font-family:var(--util);font-weight:600;
+    font-size:clamp(19px,2.4vw,27px);
+    line-height:1.3;letter-spacing:.03em;text-transform:uppercase;
+  }
+  .cta{
+    display:inline-block;margin-top:16px;
+    background:var(--ink);color:var(--amber);
+    font-family:var(--display);text-transform:uppercase;
+    font-size:clamp(16px,2vw,22px);letter-spacing:.05em;
+    padding:14px 26px 11px;text-decoration:none;
+    border:3px solid var(--ink);
+    transition:background .16s ease,color .16s ease,transform .16s ease;
+  }
+  .cta:hover{background:var(--amber);color:var(--ink);transform:translate(-3px,-3px);box-shadow:5px 5px 0 var(--ink)}
+
+  /* ---------- footer ---------- */
+  footer{
+    background:var(--ink);text-align:center;
+    padding:clamp(40px,6vw,70px) 20px;
+    border-top:4px solid var(--amber);
+  }
+  .foot-mark{
+    font-family:var(--display);text-transform:uppercase;
+    font-size:clamp(28px,6vw,64px);line-height:.9;color:var(--paper);
+  }
+  .foot-sub{
+    font-family:var(--marker);color:var(--amber);
+    font-size:clamp(14px,2vw,20px);margin-top:8px;
+  }
+  .foot-meta{
+    font-family:var(--util);letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(255,255,255,.4);font-size:13px;margin-top:22px;
+  }
+  .foot-meta a{text-decoration:none;color:var(--amber)}
+
+  @media (max-width:600px){
+    .hero{justify-content:flex-end}
+    .items li:hover{transform:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="hero">
+  <div class="hero-grain"></div>
+
+  <!-- graffiti bursts -->
+  <svg class="tag" style="top:-3%;left:-5%;width:46%;opacity:.85" viewBox="0 0 400 300" aria-hidden="true">
+    <path d="M20 240 C90 90 150 250 210 70 C240 0 290 160 380 40" stroke="#7A0E1F" stroke-width="17"/>
+    <path d="M0 160 C80 130 120 210 200 150 C260 105 320 200 400 120" stroke="#F5B942" stroke-width="9"/>
+  </svg>
+  <svg class="tag" style="bottom:6%;right:-6%;width:44%;opacity:.8" viewBox="0 0 400 300" aria-hidden="true">
+    <path d="M390 40 C300 180 250 30 180 200 C140 290 80 130 10 250" stroke="#7A0E1F" stroke-width="16"/>
+    <path d="M400 150 C320 190 280 90 200 150 C130 200 70 100 0 170" stroke="#F5B942" stroke-width="8"/>
+  </svg>
+
+  <!-- logo sticker: drop images/logo.png in and it replaces the fallback automatically -->
+  <div class="badge">
+    <img src="images/logo.png" alt="Cafe Ristro logo"
+         onerror="this.outerHTML='&lt;div class=\'badge-fallback\'&gt;CAFE&lt;br&gt;RISTRO&lt;/div&gt;'">
+  </div>
+
+  <div class="hero-inner">
+    <p class="eyebrow">Kalutara's newest drop</p>
+    <h1>Fine<br>Coffee <span class="amber">&amp;</span><br>Juice</h1>
+    <div class="hero-meta">
+      <span class="open-pill"><span class="dot"></span>Open now</span>
+      <span>202 Sir Cyryl de Zoysa Mawatha</span>
+      <span>Kalutara, Sri Lanka</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ TICKER ============ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Fresh Juice ✦ Bubble Coffee ✦ Cold Brew ✦ Mojitos ✦ Milkshakes ✦ Sandwiches ✦</span>
+    <span>Fresh Juice ✦ Bubble Coffee ✦ Cold Brew ✦ Mojitos ✦ Milkshakes ✦ Sandwiches ✦</span>
+  </div>
+</div>
+
+<!-- ============ THE BOARD ============ -->
+<section class="board" id="menu">
+  <svg class="tag" style="top:4%;right:2%;width:30%;opacity:.28" viewBox="0 0 400 300" aria-hidden="true">
+    <path d="M380 30 C300 150 240 20 170 180 C130 270 70 120 20 230" stroke="#F5B942" stroke-width="11"/>
+  </svg>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">everything on the board</span>
+      <h2>The Menu</h2>
+    </div>
+
+    <div class="board-grid">
+      <div>
+        <h3 class="cat-title">Fresh Juice &amp; Smoothies</h3>
+        <ul class="items">
+          <li><span class="nm">Mango Juice</span><span class="lead"></span><span class="pr">Rs. 350</span></li>
+          <li><span class="nm">Avocado Juice</span><span class="lead"></span><span class="pr">Rs. 450</span></li>
+          <li><span class="nm">Wood Apple Juice</span><span class="lead"></span><span class="pr">Rs. 400</span></li>
+          <li><span class="nm">Papaya Juice</span><span class="lead"></span><span class="pr">Rs. 300</span></li>
+          <li><span class="nm">Orange Juice</span><span class="lead"></span><span class="pr">Rs. 300</span></li>
+          <li><span class="nm">Mix Fruit Juice</span><span class="lead"></span><span class="pr">Rs. 450</span></li>
+          <li><span class="nm">Strawberry Banana Smoothie</span><span class="lead"></span><span class="pr">Rs. 690</span></li>
+          <li><span class="nm">Mango Smoothie</span><span class="lead"></span><span class="pr">Rs. 600</span></li>
+          <li><span class="nm">Nutella Coffee Smoothie</span><span class="lead"></span><span class="pr">Rs. 790</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="cat-title">Hot Brew</h3>
+        <ul class="items">
+          <li><span class="nm">Espresso</span><span class="lead"></span><span class="pr">Rs. 350</span></li>
+          <li><span class="nm">Americano</span><span class="lead"></span><span class="pr">Rs. 500</span></li>
+          <li><span class="nm">Cappuccino</span><span class="lead"></span><span class="pr">Rs. 600</span></li>
+          <li><span class="nm">Cafe Latte</span><span class="lead"></span><span class="pr">Rs. 600</span></li>
+          <li><span class="nm">Flat White</span><span class="lead"></span><span class="pr">Rs. 650</span></li>
+          <li><span class="nm">Cafe Mocha</span><span class="lead"></span><span class="pr">Rs. 700</span></li>
+          <li><span class="nm">Hot Chocolate</span><span class="lead"></span><span class="pr">Rs. 700</span></li>
+          <li><span class="nm">Ristro Special Latte <span class="star">★</span></span><span class="lead"></span><span class="pr">Rs. 750</span></li>
+        </ul>
+        <p class="sub">★ Flavour addition + Rs. 200</p>
+      </div>
+
+      <div>
+        <h3 class="cat-title">Cold Brew</h3>
+        <ul class="items">
+          <li><span class="nm">Iced Americano</span><span class="lead"></span><span class="pr">Rs. 550</span></li>
+          <li><span class="nm">Iced Latte</span><span class="lead"></span><span class="pr">Rs. 600</span></li>
+          <li><span class="nm">Iced Cappuccino</span><span class="lead"></span><span class="pr">Rs. 650</span></li>
+          <li><span class="nm">Iced Mocha</span><span class="lead"></span><span class="pr">Rs. 750</span></li>
+          <li><span class="nm">Iced Chocolate</span><span class="lead"></span><span class="pr">Rs. 750</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="cat-title">Bubble Coffee &amp; Mojito</h3>
+        <ul class="items">
+          <li><span class="nm">Bubble Coffee</span><span class="lead"></span><span class="pr">Rs. 490</span></li>
+          <li><span class="nm">Strawberry Bubble Coffee</span><span class="lead"></span><span class="pr">Rs. 590</span></li>
+          <li><span class="nm">Choco Bubble Coffee</span><span class="lead"></span><span class="pr">Rs. 630</span></li>
+          <li><span class="nm">Vanilla Bubble Coffee</span><span class="lead"></span><span class="pr">Rs. 600</span></li>
+          <li><span class="nm">Virgin Mojito</span><span class="lead"></span><span class="pr">Rs. 450</span></li>
+          <li><span class="nm">Strawberry Mojito</span><span class="lead"></span><span class="pr">Rs. 690</span></li>
+          <li><span class="nm">Blue Lagoon Mojito</span><span class="lead"></span><span class="pr">Rs. 750</span></li>
+          <li><span class="nm">Sunrise Mojito</span><span class="lead"></span><span class="pr">Rs. 800</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="cat-title">Milkshakes</h3>
+        <ul class="items">
+          <li><span class="nm">Vanilla / Chocolate</span><span class="lead"></span><span class="pr">Rs. 490</span></li>
+          <li><span class="nm">Strawberry</span><span class="lead"></span><span class="pr">Rs. 590</span></li>
+          <li><span class="nm">Oreo</span><span class="lead"></span><span class="pr">Rs. 650</span></li>
+          <li><span class="nm">Caramel</span><span class="lead"></span><span class="pr">Rs. 690</span></li>
+          <li><span class="nm">Protein</span><span class="lead"></span><span class="pr">Rs. 1400</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="cat-title">Snacks</h3>
+        <ul class="items">
+          <li><span class="nm">Cheese Sandwich</span><span class="lead"></span><span class="pr">Rs. 400</span></li>
+          <li><span class="nm">Cheese &amp; Ham Sandwich</span><span class="lead"></span><span class="pr">Rs. 510</span></li>
+          <li><span class="nm">Hot Dog</span><span class="lead"></span><span class="pr">Rs. 550</span></li>
+          <li><span class="nm">Nutella Sandwich</span><span class="lead"></span><span class="pr">Rs. 600</span></li>
+          <li><span class="nm">Chicken Burger</span><span class="lead"></span><span class="pr">Rs. 750</span></li>
+          <li><span class="nm">Smoked Chicken Sandwich</span><span class="lead"></span><span class="pr">Rs. 850</span></li>
+          <li><span class="nm">Tandoori Chicken Sandwich</span><span class="lead"></span><span class="pr">Rs. 990</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <p class="board-note">All prices in Sri Lankan rupees</p>
+  </div>
+</section>
+
+<!-- ============ GALLERY ============ -->
+<section id="inside">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">step inside</span>
+      <h2>The Room</h2>
+    </div>
+    <!-- Drop matching filenames into /images and these fill in automatically -->
+    <div class="gallery-grid">
+      <div class="shot" data-label="Storefront" style="background-image:url('images/shot-1.jpg')"></div>
+      <div class="shot" data-label="Counter" style="background-image:url('images/shot-2.jpg')"></div>
+      <div class="shot" data-label="Interior" style="background-image:url('images/shot-3.jpg')"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FIND US ============ -->
+<section class="find" id="visit">
+  <svg class="tag" style="bottom:-8%;left:-4%;width:38%;opacity:.35" viewBox="0 0 400 300" aria-hidden="true">
+    <path d="M10 250 C90 110 140 250 210 90 C250 0 310 170 395 60" stroke="#0A0A0A" stroke-width="15"/>
+    <path d="M0 180 C80 150 130 220 200 160 C270 100 330 190 400 130" stroke="#F5B942" stroke-width="7"/>
+  </svg>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker" style="color:#0A0A0A">come through</span>
+      <h2>Find Us</h2>
+    </div>
+
+    <div class="find-grid">
+      <div>
+        <p class="fact-label">Address</p>
+        <p class="fact-body">202 Sir Cyryl de Zoysa Mawatha<br>Kalutara, Sri Lanka</p>
+        <a class="cta" href="https://maps.google.com/?q=202+Sir+Cyryl+de+Zoysa+Mawatha,+Kalutara" target="_blank" rel="noopener">Open in Maps</a>
+      </div>
+
+      <div>
+        <p class="fact-label">Hours</p>
+        <!-- REPLACE with real opening hours -->
+        <p class="fact-body">Mon – Sun<br>8:00 AM – 9:00 PM</p>
+      </div>
+
+      <div>
+        <p class="fact-label">Talk to us</p>
+        <p class="fact-body">@caferistro<br>hello@caferistro.lk</p>
+        <a class="cta" href="https://instagram.com/caferistro" target="_blank" rel="noopener">Follow on Instagram</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <p class="foot-mark">Cafe Ristro</p>
+  <p class="foot-sub">Fine coffee &amp; juice</p>
+  <p class="foot-meta">
+    Kalutara, Sri Lanka · <a href="https://instagram.com/caferistro" target="_blank" rel="noopener">@caferistro</a>
+  </p>
+</footer>
+
+</body>
+</html>
